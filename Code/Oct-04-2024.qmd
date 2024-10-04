@@ -1,0 +1,55 @@
+---
+title: "Oct-04-2024"
+format: html
+editor: visual
+---
+set up
+```{r}
+rm(list=ls())
+library(tidyverse)
+library("here")
+```
+
+import data
+```{r}
+drugs <- read.csv(here("data","drug_resistance.csv"))
+str(drugs)
+```
+
+make treatments factors, look at the levels
+```{r}
+drugs$Treatment <- as.factor(drugs$Treatment)
+levels(drugs$Treatment)
+```
+when looking at the data we realize they didnt do data validation 
+fix the treatment variable 
+
+which - returns row numbers 
+find the rows that have any version of control using the which function
+```{r}
+fix <- which(drugs$Treatment %in% c("cantrol","control","Control")) #go looking the the treatment column and return the values that art included in the list of these options 
+#idenitify rows that need repair
+drugs$Treatment[fix] <- "control"
+levels(drugs$Treatment) #doesnt just list the one level as one
+drugs$Treatment <-factor(drugs$Treatment) #this just tells the R to re-list the levels of my factor now that they have changed
+levels(drugs$Treatment)
+```
+```{r}
+fix_drug2 <- which(drugs$Treatment %in% c("drug x 2","drug2","Drugx2"))
+drugs$Treatment[fix_drug2] <- "drug x 2"
+levels(drugs$Treatment) 
+drugs$Treatment <-factor(drugs$Treatment)
+levels(drugs$Treatment)
+```
+
+```{r}
+fix_drug3 <- which(drugs$Treatment %in% c("drug x 3","Drug x 3", "drug3"))
+drugs$Treatment[fix_drug3] <- "drug x 3"
+drugs$Treatment <-factor(drugs$Treatment)
+levels(drugs$Treatment)
+```
+
+```{r}
+fix_name_Jose <- which
+```
+
