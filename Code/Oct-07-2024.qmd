@@ -33,3 +33,25 @@ levels(tomatoes$Treatment) #still gives all 4 levels
 tomatoes$Treatment <- factor(tomatoes$Treatment)
 ```
 
+```{r}
+test <- c(2,4,6,8,10,12,14,16,18,20)
+summary(test)
+```
+
+exercise 3
+```{r}
+grades <-c(84,86,90,90,94,96)
+summary(grades)
+```
+
+now a different way
+```{r}
+quantile(grades, probs = c(0, 0.25, 0.5, 0.75, 1))
+```
+
+Exercise 4 - playing with dplyr
+```{r}
+
+```
+something different about dplyr from the book 
+  don't have to add library ggplot2 and dplyr because we are    already adding tidyverse 
