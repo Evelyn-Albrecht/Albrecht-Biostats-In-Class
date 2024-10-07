@@ -20,6 +20,16 @@ glimpse(tomatoes)
 Convert data types 
 ```{r}
 tomatoes$Plant_number <- as.factor(tomatoes$Plant_number)
+levels(tomatoes$Treatment)
 tomatoes$Treatment <- as.factor(tomatoes$Treatment)
+```
+
+```{r}
+fix <- which(tomatoes$Treatment == "control" ) #using == instead of %in% think of it as "exactly equal to
+tomatoes$Treatment[fix] <- "Control"
+fix2 <- which(tomatoes$Treatment == "fertilizer")
+tomatoes$Treatment[fix2] <- "Fertilizer"
+levels(tomatoes$Treatment) #still gives all 4 levels
+tomatoes$Treatment <- factor(tomatoes$Treatment)
 ```
 
