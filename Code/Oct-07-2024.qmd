@@ -1,0 +1,25 @@
+---
+title: "Oct-07-2024"
+author: "Evelyn"
+format: html
+editor: visual
+---
+
+setting up
+```{r}
+rm(list=ls())
+library(tidyverse)
+library("here")
+```
+
+Import data
+```{r}
+tomatoes <- read.csv(here("Data","tomato_data.csv"))
+glimpse(tomatoes)
+```
+Convert data types 
+```{r}
+tomatoes$Plant_number <- as.factor(tomatoes$Plant_number)
+tomatoes$Treatment <- as.factor(tomatoes$Treatment)
+```
+
