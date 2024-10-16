@@ -1,0 +1,111 @@
+---
+title: "rabies_qmd"
+format: html
+editor: visual
+---
+
+## Rabies project
+
+You are receiving a dataset from the New York State Department of Health that shows test results for specimens submitted to be tested for rabies\_
+
+## In Class Exercise 1
+
+### Set things up and read in the data
+
+Add the code to set up the workspace
+
+```{r}
+rm(list=ls())
+library(tidyverse)
+library("here")
+```
+
+Now read in the data and name it as an object called `rabies`\_
+
+```{r}
+rabies <- read_csv(here("data","Rabies_Laboratory_Submissions_csv"))
+```
+
+Reduce the dataset to just the first 7 columns
+
+```{r}
+rabies <- rabies %>%
+  select(1:7)
+  
+```
+
+### Examine the data
+
+1.  Get a summary for each variable\_
+
+```{r}
+summary(rabies)
+```
+
+2.  Repair column names
+
+```{r}
+names(rabies)
+```
+
+fix names by changing "\_" to "\_"
+
+```{r}
+names(rabies) <- c("Received_Year", "Received_Month", "Report_Date", "County_Name", "Animal_Classification", "Number_of_Samples", "Positive_Samples" )
+```
+
+3.  Adjust data types
+
+```{r}
+rabies$County_Name <- as.factor(rabies$County_Name)
+rabies$Animal_Classification <- as.factor(rabies$Animal_Classification)
+rabies$Report_Date <- mdy(rabies$Report_Date)
+levels(rabies$County_Name)
+levels(rabies$Animal_Classification)
+```
+
+4.  Now plot some data
+
+    make a histogram first because it shows the distribution of one variable
+
+    when making the histograms, start detecting outliers
+
+```{r}
+ggplot(rabies, aes(Received_Year)) + 
+  geom_histogram()
+ggplot(rabies, aes(Number_of_Samples)) + 
+  geom_histogram()
+ggplot(rabies, aes(Animal_classification)) + 
+  geom_histogram() #encountered error. historgrams like continuous data
+ggplot(rabies, aes(Animal_classification)) + 
+  geom_histogram(stat = "count")
+```
+
+## In Class Exercise 2
+
+### Look at some relationships
+
+5.  Create a percent positive column
+
+```{r}
+
+```
+
+6.  Using the rabies dataset, create a new object called "animal summary" in which you determine, by Year and Animal Classification, the total number of samples, total positive samples, and the mean percent positive samples\_
+
+```{r}
+animal_summary <- rabies %>% group_by(Received_Year, Animal_Classification) %>% summarise(
+  Number_Samples = sum(Number_Samples),
+  Positive_Samples = sum(Positive_Samples),
+  mean_percent_pos = mean(percent_pos)
+  
+)
+
+
+```
+
+Next, make a boxplot of those data with the following features: - The x-axis should be the animal classificaton - The y-axis should be the mean percent positive samples - Your boxplot should include the individual points laid over the boxplots\_ Make the points gray\_ - Rename the x-axis label as "Animal type" and the y-axis label as "Mean percent positive samples"
+
+```{r}
+
+```
